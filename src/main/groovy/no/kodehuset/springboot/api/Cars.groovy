@@ -1,5 +1,6 @@
 package no.kodehuset.springboot.api
 
+import no.kodehuset.springboot.domain.Car
 import no.kodehuset.springboot.repos.CarsRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpEntity
@@ -16,6 +17,7 @@ class Cars {
     @Autowired
     CarsRepository carsRepository
 
+
     @RequestMapping(value = "", method = RequestMethod.GET)
     def list() {
 
@@ -28,9 +30,8 @@ class Cars {
 
         println "Saving new car: " + payload
 
-        [
-                new Car(brand: payload.brand, model: payload.model, type: payload.type, scale: payload.scale,
-                        owned: payload.owned)
-        ]
+        carsRepository.save(new Car(brand: payload.brand, model: payload.model, type: payload.type, scale: payload.scale))
+
+        carsRepository.findAll()
     }
 }
