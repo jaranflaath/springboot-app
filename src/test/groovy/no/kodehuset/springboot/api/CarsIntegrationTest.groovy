@@ -28,7 +28,7 @@ class CarsIntegrationTest {
         String response = restTemplate.getForEntity("http://localhost:" + port + "/cars", String).body
 
         def json = new JsonSlurper().parseText(response)
-        assertEquals(3, json.size())
+        assertEquals(2, json.size())
     }
 
 
